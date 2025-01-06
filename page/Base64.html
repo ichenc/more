@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes"
+        name="viewport" />
+    <meta charset="UTF-8">
+    <title>Base64 编码/解码器</title>
+    <link href="https://ichenc.github.io/assets/img/chen.ico" rel="icon" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background-image: url('https://cn.bing.com/th?id=OHR.IcebergsAntarctica_EN-US6829804691_UHD.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            text-align: center;
+            color: #5c67f2;
+        }
+
+        .result {
+            background: #e9ecff;
+            border: 1px solid #adb5fd;
+            color: #5c67f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .result__info {
+            position: absolute;
+            top: 10px;
+            font-size: 12px;
+            cursor: pointer;
+            color: #5c67f2;
+        }
+
+        .right {
+            right: 10px;
+        }
+
+        .left {
+            left: 10px;
+        }
+
+        .result__viewbox {
+            word-wrap: break-word;
+            padding: 10px;
+            border: 1px dashed #adb5fd;
+            border-radius: 5px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result__viewbox textarea {
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 1px solid #adb5fd;
+            color: #333;
+        }
+
+        #copy-btn {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            border: none;
+            background: rgba(92, 103, 242, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .length {
+            margin-bottom: 20px;
+        }
+
+        .settings {
+            margin-bottom: 20px;
+        }
+
+        .setting {
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #5c67f2;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background: #4a54e1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="title">Base64 编码/解码器</h2>
+        <div class="result">
+            <div class="result__title field-title">原始文本</div>
+            <div class="result__info right" onclick="copyToClipboard('inputText')">复制</div>
+            <div class="result__viewbox">
+                <textarea id="inputText" rows="4" cols="50" placeholder="在这里输入文本..."></textarea>
+            </div>
+        </div>
+        <div class="result">
+            <div class="result__title field-title">编码/解码结果</div>
+            <div class="result__info right" onclick="copyToClipboard('encodedText')">复制</div>
+            <div class="result__viewbox">
+                <textarea id="encodedText" rows="4" cols="50" placeholder="编码/解码结果会显示在这里..."></textarea>
+            </div>
+        </div>
+        <button class="btn generate" id="encodeBtn">编码</button>
+        <button class="btn generate" id="decodeBtn">解码</button>
+    </div>
+
+    <script>
+        document.getElementById('encodeBtn').addEventListener('click', function() {
+            var inputText = document.getElementById('inputText').value;
+            var encodedText = btoa(inputText);
+            document.getElementById('encodedText').value = encodedText;
+        });
+
+        document.getElementById('decodeBtn').addEventListener('click', function() {
+            var encodedText = document.getElementById('inputText').value;
+            var decodedText = atob(encodedText);
+            document.getElementById('encodedText').value = decodedText;
+        });
+
+        function copyToClipboard(textBoxId) {
+            var copyText = document.getElementById(textBoxId);
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+            document.execCommand("copy");
+            alert("已复制到剪贴板");
+        }
+    </script>
+</body>
+
+</html>

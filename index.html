@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>Index - 212001.xyz</title>
+        <meta name="referrer" content="never">
+        <meta charset="UTF-8">
+        <meta name="keywords" content="Chen,212001.xyz,技术博客,个人主页,程序员,架构师,IT,BBBUG,Gitee,Github,Coding,Code,开源,开源项目">
+        <meta name="description" content="对，这是一个很苍白的个人主页。">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <link rel="stylesheet" href="./assets/css/font_666204_kf3f5tzpd8f.css">
+        <link rel="stylesheet" href="./assets/css/element.css">
+        <link rel="icon" href="https://212001.xyz/assets/img/favicon.ico">
+        <style>
+        body, html {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+        ::-webkit-scrollbar {
+            width: 0 !important
+        }
+        [v-cloak] {
+            visibility: hidden !important;
+        }
+        body{
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-weight: 300;
+            background: #fff url(./assets/img/bg.jpeg) top right no-repeat;
+            background-size: cover ;
+        }
+        #app {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            font-weight: 300;
+            padding: 10px;
+        }
+        .body {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+        .body .list {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .body .list .item {
+            display: inline-block;
+            width: 25%;
+        }
+        .body .list .item .card {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, .1);
+            border-radius: 10px;
+            margin: 10px;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            transition: all .3s;
+            cursor: pointer;
+        }
+        .body .list .item .card:hover {
+            background: rgba(255,255,255,0.5);
+        }
+        .body .list .item .card .title {
+            font-size: 24px;
+            color: #000;
+            font-weight:bold;
+        }
+        .body .list .item .card .desc {
+            font-size: 16px;
+            color: #333;
+            margin-top: 20px;
+            height: 40px;
+        }
+        </style>
+    </head>
+    
+    <body>
+        <div id="app" v-cloak>
+            <div class="body">
+                <div class="list">
+                    <div class="item" v-for="item in list">
+                        <div class="card" @click="openApp(item)">
+                            <div class="title">{{item.title}}</div>
+                            <div class="desc">{{item.desc ||"暂无说明"}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="./assets/js/vue-2.6.10.min.js"></script>
+    <script src="./assets/js/axios.min.js"></script>
+    <script src="./assets/js/element.js"></script>
+    <script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                list: [
+                    {
+                        title: "主页",
+                        desc: "没人关注和访问的个人主页",
+                        url: "https://ichenc.github.io/",
+                        self: true
+                    },
+                    {
+                        title: "永久发布页",
+                        desc: "永久地址发布页-下载中心",
+                        url: "https://v.ichenc.github.io/",
+                    },
+                    {
+                        title: "Github",
+                        desc: "我在Github的主页",
+                        url: "https://github.com/ichenc"
+                    },
+                    {
+                        title: "实时热点",
+                        desc: "优雅阅读实时和最热门的新闻",
+                        url: "https://hot.ichenc.github.io/"
+                    },
+                    {
+                        title: "Bing每日壁纸",
+                        desc: "Bing Wallpaper",
+                        url: "https://bing.ichenc.github.io/"
+                    },
+                    {
+                        title: "GitHub文件加速",
+                        desc: "加速下载Github",
+                        url: "https://gh.212001.asia/"
+                    },
+					{
+					    title: "Bro",
+					    desc: "简单的个人主页",
+					    url: "https://ichenc.github.io/more/packages/bro/"
+					},
+					{
+					    title: "阿晨算法解析系统",
+					    desc: "为您带来电视、电脑、手机、平板四端的影视服务。每个平台都有其独特的功能和优势，共同构建您的个性化观影世界",
+					    url: "https://ichenc.github.io/more/packages/阿晨同学/"
+					},
+					{
+					    title: "阿晨算法",
+					    desc: "为您带来电视、电脑、手机、平板四端的影视服务。每个平台都有其独特的功能和优势，共同构建您的个性化观影世界",
+					    url: "https://ichenc.github.io/more/packages/阿晨同学/jx/"
+					},
+					{
+					    title: "阿晨算法解析导航",
+					    desc: "为您带来电视、电脑、手机、平板四端的影视服务。每个平台都有其独特的功能和优势，共同构建您的个性化观影世界",
+					    url: "https://ichenc.github.io/more/packages/阿晨同学/jxdh/"
+					},
+					{
+					    title: "VideoPlayer",
+					    desc: "各大视频网站VIP资源免费解析1080P免广告",
+					    url: "https://ichenc.github.io/more/packages/vip/"
+					},
+					{
+					    title: "163下载",
+					    desc: "网易云音乐解析下载",
+					    url: "https://ichenc.github.io/more/packages/163下载/"
+					},
+					{
+					    title: "Win10更新",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/packages/Win10更新/"
+					},
+					{
+					    title: "底部多图轮播",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/packages/底部多图轮播/"
+					},
+					{
+					    title: "仿微信聊天",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/packages/仿微信聊天/"
+					},
+					{
+					    title: "改变色块背景",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/packages/改变色块背景/"
+					},
+					{
+					    title: "幻灯片播放插件",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/packages/幻灯片播放插件/"
+					},
+					{
+					    title: "粒子效果背景",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/packages/粒子效果背景/"
+					},
+					{
+					    title: "生日快乐",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/packages/生日快乐/"
+					},
+					{
+					    title: "页面过渡效果合集",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/packages/页面过渡效果合集/"
+					},
+					{
+					    title: "自定义粒子动画",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/packages/自定义粒子动画/"
+					},
+					{
+					    title: "粒子效果背景",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/packages/粒子效果背景/"
+					},
+					{
+					    title: "轮播图变大",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/packages/轮播图变大/"
+					},
+					{
+					    title: "让我帮你百度一下",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/packages/让我帮你百度一下/"
+					},
+					{
+					    title: "万能评论",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/page/Base64.html"
+					},
+					{
+					    title: "Fork",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/page/fork.html"
+					},
+					{
+					    title: "Win10更新",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/page/Win10更新.html"
+					},
+					{
+					    title: "阿里云盘公告页",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/page/阿里云盘公告页.html"
+					},
+					{
+					    title: "抽奖小游戏",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/page/抽奖小游戏.html"
+					},
+					{
+					    title: "密码生成器",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/page/密码生成器.html"
+					},
+					{
+					    title: "跳转页",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/page/跳转页.html"
+					},
+					{
+					    title: "系统维护页面1",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/page/系统维护页面1.html"
+					},
+					{
+					    title: "系统维护页面2",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/page/系统维护页面2.html"
+					},
+					{
+					    title: "照片展示",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/page/照片展示.html"
+					},
+					{
+					    title: "桌面时钟",
+					    desc: "",
+					    url: "https://ichenc.github.io/more/page/zmsz.html"
+					}
+                ]
+            }
+        },
+        created() {},
+        updated() {},
+        computed: {},
+        methods: {
+            openApp(app) {
+                if (app.url) {
+                    if (app.self) {
+                        location.href = app.url;
+                    } else {
+                        window.open(app.url);
+                    }
+                }
+            }
+        }
+    });
+    </script>
+
+</html>

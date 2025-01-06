@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>阿晨算法解析系统</title>
+		<meta name="description" content=阿晨 </meta>
+		<meta name="keywords" content=阿晨 </meta>
+		<meta http-equiv="Cache-Control" content="no-transform">
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta http-equiv="Cache-Control" content="no-siteapp">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="apple-mobile-web-app-title" content=阿晨</meta>
+		<link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
+		<meta itemprop="image" content="./assets/img/favicon.png"><!-- 分享显示的缩略图-->
+		<link rel="stylesheet" href="./assets/css/base.css">
+		<link rel="stylesheet" href="./assets/css/index.css" />
+		<script src="./assets/js/core.js"></script>
+		<script language="Javascript">
+			document.oncontextmenu = new Function("event.returnValue=false");
+			document.onselectstart = new Function("event.returnValue=false");
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="video-bg">
+				<video muted data-autoplay loop="loop" autoplay="autoplay" src="./assets/video/mm/1.mp4"
+					class="video-tvc" id="video-tvc" data-object-fit>抱歉，您的浏览器不支持内嵌视频</video>
+			</div>
+			<div class="content">
+				<header class="header claerFloat">
+					<div class="header-left">
+						<a href="/"><img src="./assets/img/logos.png" alt="logo" style="height: 60px;"></a>
+					</div>
+					<div class="header-right">
+						<ul class="header-links">
+
+							<li class="header-links-item"><a href="https://a.212001.xyz/jxdh/">解析导航</a></li>
+						</ul>
+					</div>
+				</header>
+				<div class="middle clearFloat">
+					<div class="slogan">
+						<img src="./assets/img/slogan.png" alt="slogan">
+					</div>
+					<div class="btn-list">
+						<a class="btn-primary icon-QRcode">
+							<img src="./assets/img/v.jpg" alt="qrcode">
+						</a>
+						<div class="btn-primary">
+							<a class="btn-hover icon-qq btn-link"
+								href="https://wpa.qq.com/msgrd?v=3&amp;uin=80611129&amp;site=qq&amp;menu=yes&amp;jumpflag=1"
+								target="_blank"></a>
+						</div>
+						<div class="btn-primary">
+							<a class="btn-hover icon-emails btn-link" href="mailto:ichenc@163.com" target="_blank"></a>
+						</div>
+					</div>
+				</div>
+				<html>
+					<!--底部开始-->
+					<footer class="footer">
+						<nav class="nav-warpper">
+							<span> </span><a href=""></a>
+						</nav>
+						<div class="feedback-info">
+							<nav class="nav-warpper"><span>|</span>
+								<a href="https://www.iqiyi.com/" target="_blank" rel="nofollow">爱奇艺</a> <span>|</span>
+								<a href="https://www.youku.com/" target="_blank" rel="nofollow">YOUKU</a> <span>|</span>
+								<a href="https://v.qq.com/" target="_blank" rel="nofollow">腾讯视频</a> <span>|</span>
+								<a href="https://www.mgtv.com" target="_blank" rel="nofollow">芒果TV</a> <span>|</span>
+								<a href="https://www.bilibili.com" target="_blank"
+									rel="nofollow">BiliBili</a><span>|</span>
+								<a href="https://wuwuwutv.com/" target="_blank" rel="nofollow">555影视</a><span>||</span>
+								<a href="https://www.youtube.com/" target="_blank"
+									rel="nofollow">YouTube</a><span>|</span>
+								<a href="https://www.netflix.com/" target="_blank"
+									rel="nofollow">Netflix</a><span>|</span>
+								<a href="https://www.twitch.tv/" target="_blank" rel="nofollow">Twitch</a><span>|</span>
+								<a href="https://a.ysscj.site/" target="_blank" rel="nofollow">影视收藏夹</a><span>|</span>
+							</nav>
+							<br>
+							<div class="word" id="hitokoto">
+								<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer>
+								</script>
+							</div>
+							<br>
+					</footer>
+					<script type="text/javascript">
+						(function() {
+							var coreSocialistValues = ["富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善"],
+								index = Math.floor(Math.random() * coreSocialistValues.length);
+							document.body.addEventListener('click', function(e) {
+								if (e.target.tagName == 'A') {
+									return;
+								}
+								var x = e.pageX,
+									y = e.pageY,
+									span = document.createElement('span');
+								span.textContent = coreSocialistValues[index];
+								index = (index + 1) % coreSocialistValues.length;
+								span.style.cssText = [
+									'z-index: 9999999; position: absolute; font-weight: bold; color: #ff0000; top: ', y -
+									20, 'px; left: ', x, 'px;'
+								].join('');
+								document.body.appendChild(span);
+								animate(span);
+							});
+
+							function animate(el) {
+								var i = 0,
+									top = parseInt(el.style.top),
+									id = setInterval(frame, 16.7);
+
+								function frame() {
+									if (i > 180) {
+										clearInterval(id);
+										el.parentNode.removeChild(el);
+									} else {
+										i += 2;
+										el.style.top = top - i + 'px';
+										el.style.opacity = (180 - i) / 180;
+									}
+								}
+							}
+						}());
+					</script>
+					<script>
+						var video = $('#video-tvc')[0];
+						$('.unmute').click(function() {
+							if ($(this).hasClass('mute')) {
+								video.muted = true;
+							} else {
+								video.muted = false;
+							}
+							$(this).toggleClass('mute')
+						})
+					</script>
+					<!--设备判断-->
+					<script type="text/javascript">
+						function browserRedirect() {
+							var sUserAgent = navigator.userAgent.toLowerCase();
+							var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+							var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+							var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+							var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+							var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+							var bIsAndroid = sUserAgent.match(/android/i) == "android";
+							var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+							var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+							var iurl = window.location.href;
+							var surl = iurl.substring(iurl.lastIndexOf('/'));
+							if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+								window.location.href = 'https://v.212001.xyz';
+							} else {}
+						}
+						browserRedirect();
+					</script>
+	</body>
+</html>

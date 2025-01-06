@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN" element::-webkit-scrollbar {display:none}>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+		<meta charset="utf-8">
+		<title>Paper Airplane - 最简洁的影视导航 </title>
+		<meta name="keywords" content="腾讯,爱奇艺,优酷,芒果,乐视等地址">
+		<meta name="description" content="本站为广大网友提供爱优腾芒等地址">
+		<link rel="icon" href="./assets/img/logo.ico" type="image/x-icon">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="full-screen" content="yes">
+		<meta name="browsermode" content="application">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="x5-page-mode" content="app">
+		<meta name="lsvn" content="aHRtbA==">
+		<meta name="author" content="LyLme">
+		<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-2-M/jquery/3.5.1/jquery.min.js"
+			type="application/javascript"></script>
+		<link href="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/4.5.3/css/bootstrap.min.css"
+			type="text/css" rel="stylesheet">
+		<link rel="stylesheet" href="./assets/css/fontawesome-free5.13.0.css" type="text/css">
+		<link rel="stylesheet" href="./assets/css/style.css" type="text/css">
+		<link rel="stylesheet" href="./assets/css/font.css" type="text/css">
+		<script type="text/javascript" src="./assets/js/mayiui.js"></script>
+		<link rel="stylesheet" href="./assets/css/mayiui.css">
+		<style>
+			.box {
+				color: #FF0000;
+			}
+		</style>
+	</head>
+	<body onload="FocusOnInput()">
+		<div class="banner-video"><img src="https://cn.bing.com/th?id=OHR.KiteDay_EN-US7254188187_UHD.jpg" />
+			<div class="bottom-cover"
+				style="background-image: linear-gradient(rgba(255, 255, 255, 0) 0%, rgb(244 248 251 / 0.6) 50%, rgb(244 248 251) 100%);">
+			</div>
+		</div>
+		<!--弹窗开始-->
+
+		<script>
+			mayiui.msg('请将本站添加到书签栏（快捷键Ctrl+D），方便下次访问；显示书签栏快捷键Ctrl+Shift+B', {
+				maskClickClose: true,
+				time: 3000
+			});
+		</script>
+		<!--弹窗结束-->
+		<!--topbar开始-->
+		<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="position: absolute; z-index: 10000;">
+			<button class="navbar-toggler collapsed" style="border: none; outline: none;" type="button"
+				data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<svg class="icon" width="200" height="200">
+					<use xlink:href="#icon-menus"></use>
+				</svg>
+				<span><svg class="bi bi-x" fill="currentColor" id="x">
+						<use xlink:href="#icon-closes"></use>
+					</svg><span></button>
+			<div class="collapse navbar-collapse" id="navbarsExample05">
+				<ul class="navbar-nav mr-auto">
+					<!-- 顶部导航开始-->
+
+					<li class="nav-item"><a class="nav-link" href="https://212001.xyz/">首页</a></li>
+					<li class="nav-item"><a class="nav-link" href="../jx/index.html">解析系统</a></li>
+					<li class="nav-item"><a class="nav-link" href="./assets/about.html">关于本站</a></li>
+
+					<!-- 顶部结束-->
+
+					<!-- 天气开始 -->
+					<div id="he-plugin-simple"></div>
+					<script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+					<!-- 天气结束 -->
+				</ul>
+				<div id="main">
+					<div id="show_date"></div><!-- 日期显示 -->
+					<div id="show_time"></div><!-- 时间显示 -->
+				</div>
+			</div>
+		</nav>
+		<!--topbar结束-->
+
+		<div class="container" style="margin-top:10vh; position: relative; z-index: 100;">
+			<h2 class="title">Paper Airplane</h2>
+			<div id="show_time"></div><!-- 首页提示文字-->
+
+			<!--搜索开始-->
+			<div id="search" class="s-search">
+				<div id="search-list" class="hide-type-list">
+					<div class="search-group group-a s-current" style=" margin-top: 50px;">
+						<ul class="search-type">
+							<li>
+								<input hidden="" checked="" type="radio" name="type" id="type-bi"
+									value="https://www.baidu.com/s?tn=15007414_1_dg&ie=utf-8&wd="
+									data-placeholder="在这里搜索想看的剧,点击书签栏的一键解析;解析不了的话,点击Player-JY查看使用方法">
+								<label for="type-bi" style="font-weight:600">
+									<img src="./assets/img/1.png">
+									<span style="color:#696a6d">
+										百度搜索
+									</span>
+								</label>
+							</li>
+							<li>
+								<input hidden="" checked="" type="radio" name="type" id="type-google"
+									value="https://www.douban.com/search?q="
+									data-placeholder="不知道看什么,来这里找找吧!随便输入,点击放大镜,然后点左上角的首页">
+								<label for="type-google" style="font-weight:600">
+									<img src="./assets/img/9.png">
+									<span style="color:#fc5531">
+										豆瓣找剧
+									</span>
+								</label>
+							</li>
+							<li>
+								<input hidden="" checked="" type="radio" name="type" id="type-fanyi"
+									value="https://fanyi.baidu.com/#zh/en/" data-placeholder="输入翻译内容（自动检测语言）">
+								<label for="type-fanyi" style="font-weight:600">
+									<img src="./assets/img/8.png">
+									<span style="color:#fc5531">
+										百度翻译
+									</span>
+								</label>
+							</li>
+							<li>
+								<input hidden="" checked="" type="radio" name="type" id="type-zx"
+									value="https://jx.playerjy.com/?url="
+									data-placeholder="复制视频网站链接(ctrl+c)粘贴(ctrl+v)到方框中,回车">
+								<label for="type-zx" style="font-weight:600">
+									<img src="./assets/img/11.png">
+									<span style="color:#696a6d">
+										Player-JY
+									</span>
+								</label>
+							</li>
+							<li>
+								<input hidden="" checked="" type="radio" name="type" id="type-xz"
+									value="https://jx.xmflv.com/?url="
+									data-placeholder="复制视频网站链接(ctrl+c)粘贴(ctrl+v)到方框中,回车">
+								<label for="type-xz" style="font-weight:600">
+									<img src="./assets/img/22.png">
+									<span style="color:#696a6d">
+										虾米
+									</span>
+								</label>
+							</li>
+							<li>
+								<input hidden="" checked="" type="radio" name="type" id="type-zhihu"
+									value="https://okjx.cc/?url=" data-placeholder="复制视频网站链接(ctrl+c)粘贴(ctrl+v)到方框中,回车">
+								<label for="type-zhihu" style="font-weight:600">
+									<img src="./assets/img/33.png">
+									<span style="color:#0084fe">
+										OKJX
+									</span>
+								</label>
+							</li>
+							<li>
+								<input hidden="" checked="" type="radio" name="type" id="type-bilibili"
+									value="https://www.yemu.xyz/?url="
+									data-placeholder="复制视频网站链接(ctrl+c)粘贴(ctrl+v)到方框中,回车">
+								<label for="type-bilibili" style="font-weight:600">
+									<img src="./assets/img/44.png">
+									<span style="color:#00aeec">
+										夜幕
+									</span>
+								</label>
+							</li>
+
+						</ul>
+					</div>
+				</div>
+				<form action="https://fanyi.baidu.com/#zh/en/" method="get" target="_blank" id="super-search-fm">
+					<input type="text" id="search-text" placeholder="输入翻译内容（自动检测语言）" style="outline:0"
+						autocomplete="off">
+					<button class="submit" type="submit">
+						<svg style="width: 22px; height: 22px; margin: 0 20px 0 20px; color: #fff;" class="icon"
+							aria-hidden="true">
+							<use xlink:href="#icon-sousuo"></use>
+						</svg><span>
+					</button>
+					<ul id="word" style="display: none;"></ul>
+				</form>
+				<div class="set-check hidden-xs">
+					<input type="checkbox" id="set-search-blank" class="bubble-3" autocomplete="off">
+				</div>
+			</div>
+
+			<!-- 链接开始-->
+			<ul class="mylist row">
+				<li class="title"><svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-remen"></use>
+					</svg>使用指南请看左上角关于本站</li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://v.qq.com"
+						target="_blank"><img src="./assets/img/tx.png"><span>腾讯视频</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.youku.com/"
+						target="_blank"><img src="./assets/img/youku.png"><span>优酷</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.iqiyi.com/"
+						target="_blank"><img src="./assets/img/aiqiyi.png"><span>爱奇艺</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.mgtv.com/"
+						target="_blank"><img src="./assets/img/mangguo.png"><span>芒果</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.bilibili.com/"
+						target="_blank"><svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-bili"></use>
+						</svg><span>哔哩哔哩</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.stuo-express.com/"
+						target="_blank"><img src="./assets/img/555.png"><span>555电影</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.libvio.me/"
+						target="_blank"><img src="./assets/img/libvio.ico"><span>Libvio</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://m1.mudvod.tv/"
+						target="_blank"><img src="./assets/img/niba.jpeg"><span>泥巴影院</span></a></li>
+
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.douyin.com/"
+						target="_blank"><svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-douyin00"></use>
+						</svg><span>抖音网页版</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.kuaishou.com/"
+						target="_blank"><svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-kuaishou00"></use>
+						</svg><span>快手网页版</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow"
+						href="https://tv.cctv.com/live/index.shtml" target="_blank"><svg class="icon"
+							aria-hidden="true">
+							<use xlink:href="#icon-cctv"></use>
+						</svg><span>CCTV直播</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.huya.com/"
+						target="_blank"><svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-huya00"></use>
+						</svg><span>虎牙直播</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.douyu.com/"
+						target="_blank"><svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-douyu00"></use>
+						</svg><span>斗鱼直播</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.yy.com/catalog"
+						target="_blank"><img src="./assets/img/yy.png"><span>YY直播</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow"
+						href="https://now.qq.com/pcweb/index.html" target="_blank"><img
+							src="./assets/img/now.jpg"><span>腾讯NOW直播</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.ximalaya.com/channel/"
+						target="_blank"><img src="./assets/img/ximalaya.jpeg"><span>喜马拉雅FM</span></a></li>
+
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.lizhi.fm/"
+						target="_blank"><img src="./assets/img/lizhi.png"><span>荔枝FM</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://music.163.com/"
+						target="_blank"><svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-wyyyy00"></use>
+						</svg><span>网易云音乐</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://y.qq.com/"
+						target="_blank"><svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-qqmusic00"></use>
+						</svg><span>QQ音乐</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.kugou.com/"
+						target="_blank"><svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-kugou00"></use>
+						</svg><span>酷狗音乐</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.lizhi.fm/"
+						target="_blank"><img src="./assets/img/kuwo.jpeg"><span>酷我音乐</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.jamendo.com/start"
+						target="_blank"><img src="./assets/img/jamendo.png"><span>jamendo</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://streetvoice.cn/"
+						target="_blank"><img src="./assets/img/jiesheng.ico"><span>街声</span></a></li>
+				<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://filehelper.weixin.qq.com/"
+						target="_blank"><svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-wechat00"></use>
+						</svg><span>微信文件传输助手</span></a></li>
+			</ul>
+			<!-- 链接结束-->
+			<script type="text/javascript">
+				< script src = "https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/4.5.3/js/bootstrap.min.js"
+				type = "application/javascript" >
+			</script>
+			<script src="./assets//js/script.js"></script>
+			<script src="./assets//js/svg.js"></script>
+			<div style="display:none;" class="back-to" id="toolBackTop">
+				<a title="返回顶部" onclick="window.scrollTo(0,0);return false;" href="#top" class="back-top"></a>
+			</div>
+			<div class="mt-5 mb-3 footer text-muted text-center">
+				Copyright © Paper Airplane
+			</div>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes"
+        name="viewport" />
+    <meta charset="UTF-8">
+    <title>随机密码生成器</title>
+    <link href="https://ichenc.github.io/assets/img/chen.ico" rel="icon" type="image/x-icon">
+  
+    <link href="./css/style.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            text-align: center;
+            color: #5c67f2;
+        }
+
+        .result {
+            background: #e9ecff;
+            border: 1px solid #adb5fd;
+            color: #5c67f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .result__info {
+            position: absolute;
+            top: 10px;
+            font-size: 12px;
+            cursor: pointer;
+            color: #5c67f2;
+        }
+
+        .right {
+            right: 10px;
+        }
+
+        .left {
+            left: 10px;
+        }
+
+        .result__viewbox {
+            word-wrap: break-word;
+            padding: 10px;
+            border: 1px dashed #adb5fd;
+            border-radius: 5px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #copy-btn {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            border: none;
+            background: #5c67f2;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .length {
+            margin-bottom: 20px;
+        }
+
+        .settings {
+            margin-bottom: 20px;
+        }
+
+        .setting {
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #5c67f2;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background: #4a54e1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="title">密码生成器</h2>
+        <div class="result">
+            <div class="result__title field-title">生成的密码</div>
+            <div class="result__info right" onclick="copyToClipboard()">点击复制</div>
+            <div class="result__viewbox" id="result">点击“生成密码”按钮生成</div>
+            <button id="copy-btn" style="--x: 0; --y: 0"><i class="far fa-copy"></i></button>
+        </div>
+        <div class="length range__slider" data-max="32" data-min="4">
+            <div class="length__title field-title" data-length='0'>长度：</div>
+            <label for="slider"></label><input id="slider" max="32" min="4" type="range" value="16" />
+        </div>
+
+        <div class="settings">
+            <span class="settings__title field-title">设置</span>
+            <div class="setting">
+                <input checked id="uppercase" type="checkbox" />
+                <label for="uppercase">包含大写</label>
+            </div>
+            <div class="setting">
+                <input checked id="lowercase" type="checkbox" />
+                <label for="lowercase">包含小写</label>
+            </div>
+            <div class="setting">
+                <input checked id="number" type="checkbox" />
+                <label for="number">包括数字</label>
+            </div>
+            <div class="setting">
+                <input id="symbol" type="checkbox" />
+                <label for="symbol">包括符号</label>
+            </div>
+        </div>
+
+        <button class="btn generate" id="generate">生成密码</button>
+    </div>
+
+    <script>
+        document.getElementById('generate').addEventListener('click', function() {
+            var length = document.getElementById('slider').value;
+            var hasUppercase = document.getElementById('uppercase').checked;
+            var hasLowercase = document.getElementById('lowercase').checked;
+            var hasNumber = document.getElementById('number').checked;
+            var hasSymbol = document.getElementById('symbol').checked;
+
+            var password = generatePassword(hasUppercase, hasLowercase, hasNumber, hasSymbol, length);
+            document.getElementById('result').textContent = password;
+        });
+
+        function copyToClipboard() {
+            var copyText = document.getElementById("result");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+            document.execCommand("copy");
+            alert("密码已复制到剪贴板");
+        }
+
+        function generatePassword(hasUppercase, hasLowercase, hasNumber, hasSymbol, length) {
+            var chars = '';
+            if (hasUppercase) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            if (hasLowercase) chars += 'abcdefghijklmnopqrstuvwxyz';
+            if (hasNumber) chars += '0123456789';
+            if (hasSymbol) chars += '!@#$%^&*()_+~`|}{[]:;?><,./-=';
+
+            var password = '';
+            for (var i = 0; i < length; i++) {
+                var randomIndex = Math.floor(Math.random() * chars.length);
+                password += chars[randomIndex];
+            }
+            return password;
+        }
+    </script>
+</body>
+
+</html>

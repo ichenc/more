@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>阿晨算法解析系统 - 一键解析</title>
+    <link rel="icon" href="./img/logo.ico" type="image/x-icon">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html, body {
+        height: 100%;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: url(https://cn.bing.com/th?id=OHR.KiteDay_EN-US7254188187_UHD.jpg) no-repeat center/cover;
+      }
+      #web_header,
+      #web_footer {
+        flex-grow: 1;
+      }
+      #web_middle {
+        flex-grow: 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #web_info {
+        width: 32rem;
+        height: 24rem;
+        background-color: rgba(154, 167, 177, 0.5);
+        backdrop-filter: blur(3rem);
+        border-radius: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0.25rem 0.25rem 1.25rem darkgrey;
+        transition: box-shadow 0.2s ease-in-out;
+      }
+      #web_info:hover {
+        box-shadow: 0.25rem 0.25rem 2.15rem darkgrey;
+      }
+      #web_info a {
+        cursor: pointer;
+        font-size: 1.8rem;
+        color: aliceblue;
+        text-decoration: none;
+        text-shadow: 0.25rem 0.25rem 1.25rem azure;
+        letter-spacing: 0.25rem;
+        text-transform: uppercase;
+        background: linear-gradient(90deg, black 0%, white 60%, black 100%);
+        background-size: 80%;
+        background-repeat: no-repeat;
+        -webkit-background-clip: text;
+        background-clip: text;
+        animation: gradient 3s linear infinite;
+      }
+      #web_info a:hover {
+        text-shadow: 0.25rem 0.25rem 2.15rem azure;
+      }
+      @keyframes gradient {
+        from {
+          background-position: -500%;
+        }
+        to {
+          background-position: 500%;
+        }
+      }
+      @media screen and (max-width: 36rem) {
+        #web_info {
+          width: 24rem;
+          height: 18rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="web_header"></div>
+    <div id="web_middle">
+      <div id="web_info">
+        <a href='javascript:(function(){window.open("https://jx.playerjy.com/?url="+document.location.href)})()'
+           onclick="alert('请将此按钮拖动到书签栏中，在观看的视频页面点击进行解析。');return false;">
+          <i class="fa fa-rocket"></i>一键解析
+        </a>
+      </div>
+    </div>
+   

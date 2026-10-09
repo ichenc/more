@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DNS设置教程</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='%232563eb'/%3E%3Ctext x='50' y='66' font-size='48' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3ED%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f6f8fc;
+    --card:#ffffff;
+    --ink:#0f172a;
+    --ink-2:#475569;
+    --ink-3:#94a3b8;
+    --line:#e2e8f0;
+    --blue:#2563eb;
+    --blue-soft:#eff4ff;
+    --green:#16a34a;
+    --green-soft:#f0fdf4;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px 80px}
+
+  /* ===== Hero ===== */
+  .hero{
+    background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#3b82f6 100%);
+    color:#fff;
+    padding:56px 24px 64px;
+    text-align:center;
+  }
+  .hero .badge{
+    display:inline-block;
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.25);
+    padding:4px 14px;
+    border-radius:999px;
+    font-size:13px;
+    letter-spacing:1px;
+    margin-bottom:18px;
+  }
+  .hero h1{font-size:34px;font-weight:700;letter-spacing:1px;margin-bottom:14px}
+  .hero p{max-width:640px;margin:0 auto;font-size:15px;opacity:.92}
+
+  /* ===== 通用卡片 ===== */
+  .panel{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 28px;
+    box-shadow:0 8px 30px rgba(15,23,42,.05);
+  }
+  .intro{margin-top:-34px;position:relative}
+  .intro h2, .dns-panel h2{font-size:17px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .intro h2::before{content:"";width:4px;height:18px;background:var(--blue);border-radius:2px}
+  .intro p{color:var(--ink-2);font-size:14.5px}
+
+  /* ===== DNS 表格 ===== */
+  .dns-panel{margin-top:22px}
+  .dns-panel h2::before{content:"";width:4px;height:18px;background:var(--green);border-radius:2px}
+  .dns-table{width:100%;border-collapse:collapse;font-size:14px}
+  .dns-table th{
+    text-align:left;
+    padding:10px 12px;
+    background:#f8fafc;
+    color:var(--ink-3);
+    font-weight:500;
+    font-size:12.5px;
+    border-bottom:1px solid var(--line);
+  }
+  .dns-table td{
+    padding:11px 12px;
+    border-bottom:1px solid var(--line);
+    vertical-align:middle;
+  }
+  .dns-table tr:last-child td{border-bottom:none}
+  .dns-table .name{font-weight:600;white-space:nowrap}
+  .dns-table .name small{display:block;font-weight:400;color:var(--ink-3);font-size:11.5px}
+  .dns-table code{
+    font-family:"SF Mono",Consolas,monospace;
+    background:var(--blue-soft);
+    color:var(--blue);
+    padding:2px 7px;
+    border-radius:5px;
+    font-size:12.5px;
+    word-break:break-all;
+  }
+  .tag{
+    display:inline-block;
+    font-size:11px;
+    padding:1px 8px;
+    border-radius:999px;
+    margin-left:6px;
+    vertical-align:middle;
+  }
+  .tag.cn{background:#fee2e2;color:#b91c1c}
+  .tag.intl{background:#e0e7ff;color:#4338ca}
+  .latency{
+    font-family:"SF Mono",Consolas,monospace;
+    font-size:13px;
+    font-weight:600;
+    white-space:nowrap;
+    color:var(--ink-2);
+  }
+  .latency.good{color:#16a34a}
+  .latency.mid{color:#d97706}
+  .latency.bad{color:#dc2626}
+  .live-dot{
+    display:inline-block;width:6px;height:6px;border-radius:50%;
+    background:#16a34a;margin-left:4px;vertical-align:middle;
+    animation:pulse 1.6s infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .refresh-btn{
+    margin-left:8px;font-size:11px;font-weight:400;
+    color:var(--ink-3);cursor:pointer;border:1px solid var(--line);
+    background:#fff;border-radius:6px;padding:2px 8px;vertical-align:middle;
+  }
+  .refresh-btn:hover{color:var(--blue);border-color:var(--blue)}
+
+  /* ===== 平台标签页 ===== */
+  .tabs{
+    margin-top:22px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .tab-bar{
+    display:flex;
+    flex-wrap:wrap;
+    border-bottom:1px solid var(--line);
+    background:#f8fafc;
+  }
+  .tab-btn{
+    flex:1;
+    min-width:100px;
+    padding:15px 8px;
+    border:none;
+    background:transparent;
+    font-size:14px;
+    font-weight:500;
+    color:var(--ink-2);
+    cursor:pointer;
+    border-bottom:2px solid transparent;
+    transition:all .2s;
+    font-family:inherit;
+  }
+  .tab-btn:hover{color:var(--blue);background:#fff}
+  .tab-btn.active{
+    color:var(--blue);
+    border-bottom-color:var(--blue);
+    background:#fff;
+    font-weight:600;
+  }
+  .tab-pane{display:none;padding:28px}
+  .tab-pane.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  .step{display:flex;gap:14px;margin-bottom:16px}
+  .step:last-child{margin-bottom:0}
+  .step-num{
+    flex-shrink:0;
+    width:26px;height:26px;
+    background:var(--blue);
+    color:#fff;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:600;
+    margin-top:2px;
+  }
+  .step-body{flex:1;font-size:14.5px;color:var(--ink-2)}
+  .step-body strong{color:var(--ink)}
+  .step-body code{
+    background:var(--blue-soft);
+    color:var(--blue);
+    padding:2px 7px;
+    border-radius:5px;
+    font-size:13px;
+    font-family:"SF Mono",Consolas,monospace;
+  }
+  .shot{
+    margin-top:18px;
+    width:100%;
+    border:1px solid var(--line);
+    border-radius:10px;
+    display:block;
+  }
+  .note{
+    margin-top:16px;
+    padding:12px 16px;
+    background:#fffbeb;
+    border-left:3px solid #f59e0b;
+    border-radius:6px;
+    font-size:13.5px;
+    color:#92400e;
+  }
+  .verdict{
+    margin-top:16px;
+    padding:12px 16px;
+    background:var(--green-soft);
+    border-left:3px solid var(--green);
+    border-radius:6px;
+    font-size:13.5px;
+    color:#166534;
+  }
+  .verdict code, .note code{
+    font-family:"SF Mono",Consolas,monospace;
+    background:rgba(255,255,255,.7);
+    padding:1px 6px;
+    border-radius:4px;
+    font-size:12.5px;
+  }
+
+  footer{
+    text-align:center;
+    margin-top:40px;
+    font-size:12.5px;
+    color:var(--ink-3);
+  }
+
+  @media (max-width:640px){
+    .hero{padding:40px 18px 56px}
+    .hero h1{font-size:26px}
+    .tab-pane{padding:20px 16px}
+    .tab-btn{min-width:33.33%;font-size:13px;padding:12px 4px}
+    .dns-panel{padding:18px 14px;overflow-x:auto}
+    .dns-table{font-size:12.5px}
+    .dns-table th, .dns-table td{padding:8px 6px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<header class="hero">
+  <div class="badge">网络优化 · 公共 DNS</div>
+  <h1>DNS 设置教程</h1>
+  <p>部分地区移动网络下无法访问部分网站，往往是运营商 DNS 解析不稳定所致。切换到公共 DNS 即可解决，以下是地址大全与各设备配置方法。</p>
+</header>
+
+<div class="wrap">
+
+  <!-- ===== 问题说明 ===== -->
+  <section class="panel intro">
+    <h2>为什么要修改 DNS</h2>
+    <p>同样的网站，电信、联通用户能正常打开，移动用户却打不开——很大几率是移动运营商的 DNS 服务器不及联通、电信稳定，导致域名解析失败。尝试改用公共 DNS 通常可以解决；如仍无法访问，可联系运营商官方客服。</p>
+  </section>
+
+  <!-- ===== 公共 DNS 大全 ===== -->
+  <section class="panel dns-panel">
+    <h2>常用公共 DNS 地址大全</h2>
+    <div style="overflow-x:auto">
+    <table class="dns-table">
+      <colgroup>
+        <col style="width:16%">
+        <col style="width:21%">
+        <col style="width:22%">
+        <col style="width:29%">
+        <col style="width:12%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>服务商</th>
+          <th>IPv4 地址</th>
+          <th>IPv6 地址</th>
+          <th>加密 DNS（DoH）</th>
+          <th>GitHub 解析 <span class="live-dot"></span><button class="refresh-btn" id="refreshLatency">重测</button></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">阿里 AliDNS<span class="tag cn">国内</span><small>推荐 · 无劫持</small></td>
+          <td><code>223.5.5.5</code><br><code>223.6.6.6</code></td>
+          <td><code>2400:3200::1</code><br><code>2400:3200:baba::1</code></td>
+          <td><code>https://dns.alidns.com/dns-query</code></td>
+          <td class="latency" data-test="https://dns.alidns.com/resolve?name=github.com&type=A">…</td>
+        </tr>
+        <tr>
+          <td class="name">腾讯 DNSPod<span class="tag cn">国内</span></td>
+          <td><code>119.29.29.29</code><br><code>182.254.116.116</code></td>
+          <td><code>2402:4e00::</code><br><code>2402:4e00:1::</code></td>
+          <td><code>https://doh.pub/dns-query</code></td>
+          <td class="latency" data-test="https://doh.pub/dns-query?name=github.com&type=A">…</td>
+        </tr>
+        <tr>
+          <td class="name">百度 Baidu<span class="tag cn">国内</span></td>
+          <td><code>180.76.76.76</code></td>
+          <td><code>2400:da00::6666</code></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td class="name">114DNS<span class="tag cn">国内</span><small>老牌 · 纯净</small></td>
+          <td><code>114.114.114.114</code><br><code>114.114.115.115</code></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td class="name">Google<span class="tag intl">国际</span></td>
+          <td><code>8.8.8.8</code><br><code>8.8.4.4</code></td>
+          <td><code>2001:4860:4860::8888</code><br><code>2001:4860:4860::8844</code></td>
+          <td><code>https://dns.google/dns-query</code></td>
+          <td class="latency" data-test="https://dns.google/resolve?name=github.com&type=A">…</td>
+        </tr>
+        <tr>
+          <td class="name">Cloudflare<span class="tag intl">国际</span><small>隐私优先</small></td>
+          <td><code>1.1.1.1</code><br><code>1.0.0.1</code></td>
+          <td><code>2606:4700:4700::1111</code><br><code>2606:4700:4700::1001</code></td>
+          <td><code>https://cloudflare-dns.com/dns-query</code></td>
+          <td class="latency" data-test="https://1.1.1.1/dns-query?name=github.com&type=A">…</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="note">「GitHub 解析」列实时测各 DoH 服务器解析 <code>github.com</code> 的往返耗时，数字越小越适合访问 GitHub；百度、114 无公开 DoH 接口，浏览器无法直接测速。点击"重测"可随时刷新。</div>
+  </section>
+
+  <!-- ===== 平台教程 ===== -->
+  <section class="tabs">
+    <div class="tab-bar" role="tablist">
+      <button class="tab-btn active" data-tab="android">Android</button>
+      <button class="tab-btn" data-tab="ios">iOS</button>
+      <button class="tab-btn" data-tab="mac">Mac OS</button>
+      <button class="tab-btn" data-tab="windows">Windows</button>
+      <button class="tab-btn" data-tab="firefox">Firefox</button>
+      <button class="tab-btn" data-tab="chrome">Chrome</button>
+    </div>
+
+    <!-- Android -->
+    <div class="tab-pane active" id="android">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">进入系统<strong>设置</strong>页面，点击<strong>【无线和网络】</strong>。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">在无线和网络页面中，点击<strong>【加密 DNS】</strong>。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">选中<strong>【指定加密 DNS 服务】</strong>，在输入框填入 <code>dns.alidns.com</code>，保存即可。</div>
+      </div>
+      <img class="shot" src="assets/android.png" alt="Android 加密 DNS 配置三步示意">
+      <div class="note">不同品牌 Android 机型菜单略有差异，一般在「设置 → 网络 / WLAN → 私人 DNS 或加密 DNS」中可找到对应选项。</div>
+    </div>
+
+    <!-- iOS -->
+    <div class="tab-pane" id="ios">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">依次进入 <strong>「设置」→「无线局域网」</strong>，点击已连接 WiFi 右侧的 <strong>「i」</strong> 图标，拉到下方点击 <strong>「配置 DNS」</strong>。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">将<strong>「自动」</strong>切换为 <strong>「手动」</strong>。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">点击「添加服务器」，填入 <code>223.5.5.5</code> 与 <code>223.6.6.6</code>。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">点击右上角<strong>「存储」</strong>完成设置。</div>
+      </div>
+      <img class="shot" src="assets/ios.webp" alt="iPhone 配置 DNS 四步示意">
+    </div>
+
+    <!-- Mac -->
+    <div class="tab-pane" id="mac">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">选取苹果菜单 <strong>→「系统偏好设置」→「网络」</strong>。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">左侧选择正在使用的网络（Wi-Fi 或以太网），点击右下角<strong>「高级…」</strong>。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">切换到 <strong>DNS</strong> 选项卡，点击左下角 <code>+</code> 按钮添加 DNS 服务器。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">填入 <code>223.5.5.5</code>、<code>223.6.6.6</code>，点击「好」→「应用」保存。</div>
+      </div>
+      <img class="shot" src="assets/mac.png" alt="Mac OS DNS 选项卡添加服务器">
+      <div class="verdict">验证：在终端执行 <code>nslookup</code>，若返回 server 为阿里公共 DNS 即配置成功。</div>
+    </div>
+
+    <!-- Windows -->
+    <div class="tab-pane" id="windows">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">按 <code>Win + I</code> 打开<strong>设置</strong>，进入 <strong>「网络和 Internet」</strong>。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">选择当前连接的网络（Wi-Fi 或以太网），找到 <strong>「DNS 服务器分配」</strong>，点击<strong>「编辑」</strong>。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">将自动 (DHCP) 改为 <strong>「手动」</strong>，打开 <strong>IPv4</strong> 开关。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">首选 DNS 填 <code>223.5.5.5</code>，备用 DNS 填 <code>223.6.6.6</code>，点击<strong>「保存」</strong>。</div>
+      </div>
+      <img class="shot" src="assets/windows.png" alt="Windows 11 编辑网络 DNS 设置">
+      <div class="note">如同时需要加密 DNS，可在同一页面开启「DNS over HTTPS」，提供商选择「自动模板」或自定义填入 <code>https://dns.alidns.com/dns-query</code>。</div>
+    </div>
+
+    <!-- Firefox -->
+    <div class="tab-pane" id="firefox">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">点击 Firefox 右上角菜单 <strong>☰ →「设置」</strong>。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">在顶部搜索框输入 <code>DNS</code>，在【网络设置】右侧点击 <strong>【设置…】</strong>。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">勾选<strong>「启用基于 HTTPS 的 DNS」</strong>，提供商选择<strong>「自定义」</strong>，填入 <code>https://dns.alidns.com/dns-query</code>，点击确定。</div>
+      </div>
+      <img class="shot" src="assets/firefox.png" alt="Firefox 搜索 DNS 进入网络设置">
+    </div>
+
+    <!-- Chrome -->
+    <div class="tab-pane" id="chrome">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">打开 Chrome，右上角菜单 <strong>⋮ →「设置」</strong>。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">在搜索框输入 <code>DNS</code>，点击<strong>「安全」</strong>进入。</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">下拉到最下方，开启<strong>「使用安全 DNS」</strong>，方式选择<strong>「自定义」</strong>，填入 <code>https://dns.alidns.com/dns-query</code>。</div>
+      </div>
+      <img class="shot" src="assets/chrome.png" alt="Chrome 使用安全 DNS 自定义">
+    </div>
+  </section>
+
+  <footer>
+    教程整理自公开网络分享 · 推荐国内用户使用阿里 / 腾讯 / 114 · 如仍无法访问请联系运营商客服
+  </footer>
+
+</div>
+
+<script>
+  const btns = document.querySelectorAll('.tab-btn');
+  const panes = document.querySelectorAll('.tab-pane');
+  btns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const id = btn.dataset.tab;
+      btns.forEach(b=>b.classList.remove('active'));
+      panes.forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(id).classList.add('active');
+    });
+  });
+
+  // ===== 实时延迟测速：对每个 DoH 端点发一次请求，测 RTT =====
+  async function measureOne(url, cell){
+    cell.textContent = '测速中…';
+    cell.className = 'latency';
+    const t0 = performance.now();
+    const ctrl = new AbortController();
+    const timer = setTimeout(()=>ctrl.abort(), 6000);
+    try{
+      await fetch(url, {
+        mode: 'no-cors',
+        cache: 'no-store',
+        signal: ctrl.signal,
+        redirect: 'follow'
+      });
+      clearTimeout(timer);
+      const ms = Math.round(performance.now() - t0);
+      cell.textContent = ms + ' ms';
+      cell.classList.add(ms < 100 ? 'good' : ms < 300 ? 'mid' : 'bad');
+    }catch(e){
+      clearTimeout(timer);
+      cell.textContent = '超时';
+      cell.classList.add('bad');
+    }
+  }
+  function runLatencyTest(){
+    document.querySelectorAll('.latency').forEach(cell=>{
+      const url = cell.dataset.test;
+      if(url) measureOne(url, cell);
+    });
+  }
+  document.getElementById('refreshLatency').addEventListener('click', runLatencyTest);
+  // 页面加载完成自动跑一次（每次刷新都看到最新延迟）
+  window.addEventListener('load', ()=>setTimeout(runLatencyTest, 300));
+</script>
+
+</body>
+</html>
